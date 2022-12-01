@@ -64,6 +64,11 @@ class AppStyles extends TextTheme {
             fontWeight: FontWeight.w300,
             fontStyle: FontStyle.normal,
           ),
+          headline4: GoogleFonts.inter(
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w400,
+            fontStyle: FontStyle.normal,
+          ),
         ),
       );
 

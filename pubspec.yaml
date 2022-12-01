@@ -45,6 +45,7 @@ dependencies:
   sqflite: 2.2.0+3
   stack_trace: 1.10.0
   stock: 1.0.0
+  simple_animations: 5.0.0+3
 
 dev_dependencies:
   flutter_test:
