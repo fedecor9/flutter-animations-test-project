@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_template/ui/common/animated_drop_container.dart';
+import 'package:flutter_template/ui/common/animated_square.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/section/error_handler/error_handler_cubit.dart';
 
@@ -24,18 +27,20 @@ class _SignInContentScreen extends StatelessWidget {
             title: Text(context.localizations.sign_in),
           ),
           body: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(child: _SignInForm()),
+              _SignInForm(),
               if (context.read<SignInCubit>().state.error.isNotEmpty)
                 Text(
                   context.localizations
                       .error(context.read<SignInCubit>().state.error),
                 ),
+              SizedBox(height: 20.h),
               TextButton(
                 onPressed: () => context.read<SignInCubit>().signIn(),
                 child: Text(context.localizations.sign_in),
               ),
+              SizedBox(height: 200.h),
             ],
           ),
         ),
@@ -69,33 +74,40 @@ class _SignInFormState extends State<_SignInForm> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _emailTextController,
-              onChanged: (String text) => _signInCubit.changeEmail(text),
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                labelText: context.localizations.mail,
+  Widget build(BuildContext context) => DropAnimatedContainer(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: _emailTextController,
+                onChanged: (String text) => _signInCubit.changeEmail(text),
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  labelText: context.localizations.mail,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              obscureText: true,
-              controller: _passwordTextController,
-              onChanged: (String password) =>
-                  _signInCubit.changePassword(password),
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                labelText: context.localizations.password,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                obscureText: true,
+                controller: _passwordTextController,
+                onChanged: (String password) =>
+                    _signInCubit.changePassword(password),
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  labelText: context.localizations.password,
+                ),
               ),
             ),
-          ),
-        ],
+            // const Padding(
+            //   padding: EdgeInsets.all(8),
+            //   child: AnimatedSquare(),
+            // ),
+          ],
+        ),
       );
 }

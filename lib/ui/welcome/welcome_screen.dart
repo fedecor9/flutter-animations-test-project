@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/core/model/project.dart';
+import 'package:flutter_template/ui/common/slide_in_animation.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/section/error_handler/error_handler_cubit.dart';
 import 'package:flutter_template/ui/theme/app_theme.dart';
+import 'package:flutter_template/ui/welcome/project_card.dart';
 import 'package:flutter_template/ui/welcome/welcome_cubit.dart';
-import 'package:flutter_web_browser/flutter_web_browser.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -22,62 +24,183 @@ class _WelcomeContentScreen extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocBuilder<WelcomeCubit, WelcomeBaseState>(
         builder: (context, state) => Scaffold(
-          appBar: AppBar(
-            title: Text(context.localizations.xmartlabs_projects),
-            actions: [
-              TextButton(
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(
-                    context.theme.colors.onPrimary,
+          backgroundColor: const Color.fromARGB(255, 149, 216, 245),
+          body: Stack(
+            children: [
+              Positioned(
+                left: -40.w,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 40.h),
+                  child: Image.asset(
+                    'assets/splash_branding.png',
+                    width: .7.sw,
+                    fit: BoxFit.contain,
+                    color: context.theme.colors.primary,
                   ),
                 ),
-                onPressed: () => context.read<WelcomeCubit>().logOut(),
-                child: Text(context.localizations.log_out),
               ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: .22.sh,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 30.w),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton(
+                          onPressed: context.read<WelcomeCubit>().logOut,
+                          child: Text(
+                            'Log out',
+                            style: context.theme.textStyles.headline4,
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              MyWidget(
+                projects: state.projects,
+              )
             ],
-          ),
-          body: ListView.builder(
-            padding: const EdgeInsets.all(8.0),
-            itemCount: state.projects.length,
-            itemBuilder: (context, index) {
-              final project = state.projects[index];
-              return _ProjectWidget(project: project);
-            },
           ),
         ),
       );
 }
 
-class _ProjectWidget extends StatelessWidget {
-  const _ProjectWidget({
-    required this.project,
+class _ProjectListContent extends StatelessWidget {
+  final List<Project> projects;
+  final void Function() toggle;
+
+  const _ProjectListContent({
+    required this.projects,
+    required this.toggle,
     Key? key,
   }) : super(key: key);
 
-  final Project project;
-
   @override
-  Widget build(BuildContext context) => GestureDetector(
-        onTap: () => FlutterWebBrowser.openWebPage(url: project.url),
-        child: Card(
-          child: Column(
-            children: [
-              AspectRatio(
-                aspectRatio: 16 / 6,
-                child: AspectRatio(
-                  aspectRatio: 16 / 6,
-                  child: Image.network(
-                    project.imageUrl,
-                    fit: BoxFit.fitHeight,
-                  ),
-                ),
+  Widget build(BuildContext context) => Container(
+        color: Colors.white,
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              pinned: true,
+              expandedHeight: 100.h,
+              title: Text(
+                context.localizations.xmartlabs_projects,
+                style: context.theme.textStyles.bodyLarge!
+                    .copyWith(color: Colors.white),
               ),
-              ListTile(
-                title: Text(project.name),
-                subtitle: Text(project.description),
+              leading: IconButton(
+                onPressed: () {
+                  toggle();
+                },
+                icon: const Icon(Icons.menu),
               ),
-            ],
-          ),
+            ),
+            SliverFixedExtentList(
+              itemExtent: 200.h,
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  final project = projects[index];
+                  return SlideInAnimation(
+                    myChild: ProjectWidget(project: project),
+                  );
+                },
+                childCount: projects.length,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.all(20.0.sp),
+                child: const Text('Made with ❤️ by Xmartlabs'),
+              ),
+            )
+          ],
         ),
       );
+}
+
+class MyWidget extends StatefulWidget {
+  final List<Project> projects;
+  const MyWidget({
+    required this.projects,
+    super.key,
+  });
+
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  var isOpen = false;
+  bool _canBeDragged = true;
+  final duration = const Duration(milliseconds: 200);
+
+  void toogle() {
+    controller.isDismissed ? controller.forward() : controller.reverse();
+  }
+
+  void _onDragStart(DragStartDetails details) {
+    final bool isDragOpen =
+        controller.isDismissed && details.globalPosition.dx < 500;
+    final bool isDragClose =
+        controller.isCompleted && details.globalPosition.dx > 150;
+    _canBeDragged = isDragOpen || isDragClose;
+  }
+
+  void _onDragEnd(DragEndDetails details) {
+    if (controller.isDismissed || controller.isCompleted) return;
+    if (details.velocity.pixelsPerSecond.dx.abs() >= 365.0) {
+      final visualVelocity = details.velocity.pixelsPerSecond.dx /
+          MediaQuery.of(context).size.width;
+      controller.fling(velocity: visualVelocity);
+    } else {
+      controller.value < .5 ? controller.reverse() : controller.forward();
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(vsync: this, duration: duration);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final customAnimationBuilder = AnimatedBuilder(
+      animation: controller,
+      builder: (context, child) {
+        final dx = controller.value * 100;
+        final scale = 1 - (controller.value * .3);
+        return GestureDetector(
+          onHorizontalDragUpdate: (details) {
+            if (_canBeDragged) {
+              final delta = details.primaryDelta! / 250;
+              controller.value += delta;
+            }
+          },
+          onHorizontalDragEnd: _onDragEnd,
+          onHorizontalDragStart: _onDragStart,
+          child: Transform(
+            transform: Matrix4.identity()
+              ..translate(dx)
+              ..scale(scale),
+            alignment: Alignment.centerRight,
+            child: child,
+          ),
+        );
+      },
+      child: _ProjectListContent(
+        projects: widget.projects,
+        toggle: toogle,
+      ),
+    );
+    return customAnimationBuilder;
+  }
 }
