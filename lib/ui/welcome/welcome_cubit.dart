@@ -42,5 +42,5 @@ class WelcomeCubit extends Cubit<WelcomeBaseState> {
   Future<void> logOut() => _sessionRepository.logOut().mapToResult();
 
   Future<void> goToAnimations() =>
-      _router.navigate(const ParticlesCanvasRoute());
+      _router.navigate(const AnimationsFlowRoute());
 }

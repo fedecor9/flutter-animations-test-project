@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_route/empty_router_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/ui/animated_examples/main_menu/main_animations_menu.dart';
 import 'package:flutter_template/ui/animated_examples/particle_effect/particle_effect.dart';
@@ -33,12 +34,18 @@ part 'app_router.gr.dart';
           initial: true,
         ),
         AutoRoute(
-          path: AppRouter.animationsMenu,
-          page: AnimationsMenu,
+          path: 'AnimationsFlow',
+          name: 'AnimationsFlowRoute',
+          page: EmptyRouterPage,
           children: [
             AutoRoute(
               path: AppRouter.particlesEffect,
               page: ParticlesCanvas,
+            ),
+            AutoRoute(
+              path: AppRouter.animationsMenu,
+              page: AnimationsMenu,
+              initial: true,
             ),
           ],
         ),

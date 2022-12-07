@@ -41,16 +41,22 @@ class _$AppRouter extends RootStackRouter {
         child: const WelcomeScreen(),
       );
     },
-    AnimationsMenuRoute.name: (routeData) {
+    AnimationsFlowRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const AnimationsMenu(),
+        child: const EmptyRouterPage(),
       );
     },
     ParticlesCanvasRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
         child: const ParticlesCanvas(),
+      );
+    },
+    AnimationsMenuRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const AnimationsMenu(),
       );
     },
   };
@@ -92,15 +98,27 @@ class _$AppRouter extends RootStackRouter {
               parent: AuthenticatedRouter.name,
             ),
             RouteConfig(
-              AnimationsMenuRoute.name,
-              path: 'animations_menu',
+              AnimationsFlowRoute.name,
+              path: 'AnimationsFlow',
               parent: AuthenticatedRouter.name,
               children: [
                 RouteConfig(
+                  '#redirect',
+                  path: '',
+                  parent: AnimationsFlowRoute.name,
+                  redirectTo: 'animations_menu',
+                  fullMatch: true,
+                ),
+                RouteConfig(
                   ParticlesCanvasRoute.name,
                   path: 'particlesEffect',
-                  parent: AnimationsMenuRoute.name,
-                )
+                  parent: AnimationsFlowRoute.name,
+                ),
+                RouteConfig(
+                  AnimationsMenuRoute.name,
+                  path: 'animations_menu',
+                  parent: AnimationsFlowRoute.name,
+                ),
               ],
             ),
           ],
@@ -159,16 +177,16 @@ class WelcomeScreenRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [AnimationsMenu]
-class AnimationsMenuRoute extends PageRouteInfo<void> {
-  const AnimationsMenuRoute({List<PageRouteInfo>? children})
+/// [EmptyRouterPage]
+class AnimationsFlowRoute extends PageRouteInfo<void> {
+  const AnimationsFlowRoute({List<PageRouteInfo>? children})
       : super(
-          AnimationsMenuRoute.name,
-          path: 'animations_menu',
+          AnimationsFlowRoute.name,
+          path: 'AnimationsFlow',
           initialChildren: children,
         );
 
-  static const String name = 'AnimationsMenuRoute';
+  static const String name = 'AnimationsFlowRoute';
 }
 
 /// generated route for
@@ -181,4 +199,16 @@ class ParticlesCanvasRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ParticlesCanvasRoute';
+}
+
+/// generated route for
+/// [AnimationsMenu]
+class AnimationsMenuRoute extends PageRouteInfo<void> {
+  const AnimationsMenuRoute()
+      : super(
+          AnimationsMenuRoute.name,
+          path: 'animations_menu',
+        );
+
+  static const String name = 'AnimationsMenuRoute';
 }
