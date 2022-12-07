@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/ui/animated_examples/particle_effect/particle/particle.dart';
@@ -40,59 +39,61 @@ class _ParticleCircleTapsState extends State<ParticleCircleTaps> {
 
   bool tapVisible = true;
 
+  Duration dur = const Duration(milliseconds: 600);
+
   @override
   Widget build(BuildContext context) => SizedBox(
         height: .3.sh,
         child: Stack(
           children: [
-            tapVisible
-                ? GestureDetector(
-                    onTapDown: (details) {
-                      _generateParticles(
-                        x: details.localPosition.dx,
-                        y: details.localPosition.dy,
-                      );
-                      setState(() {
-                        tapVisible = !tapVisible;
-                      });
-                      _removeParticles();
-                    },
-                    child: Container(
-                      height: .4.sh,
-                      width: 1.sw,
-                      decoration: const BoxDecoration(
-                        color: Colors.transparent,
-                        shape: BoxShape.rectangle,
-                      ),
-                    ),
-                  )
-                : Container(),
+            GestureDetector(
+              onTapDown: (details) {
+                _generateParticles(
+                  x: details.localPosition.dx,
+                  y: details.localPosition.dy,
+                );
+                // setState(() {
+                //   tapVisible = !tapVisible;
+                // });
+                Future.delayed(
+                  dur,
+                  _removeParticles,
+                );
+              },
+              child: Container(
+                height: .4.sh,
+                width: 1.sw,
+                decoration: const BoxDecoration(
+                  color: Colors.transparent,
+                  shape: BoxShape.rectangle,
+                ),
+              ),
+            ),
             ...particles
           ],
         ),
       );
 
   void _removeParticles() {
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        setState(() {
-          tapVisible = !tapVisible;
-          particles = [];
-        });
-      },
-    );
+    setState(() {
+      particles = particles.slice(0, 49);
+    });
   }
 
   void _generateParticles({required double x, required double y}) {
+    final List<Widget> newParticles = [];
     for (final _ in Iterable.generate(50)) {
-      particles.add(
+      newParticles.add(
         Particle(
+          // onCompleted: _removeParticles,
           x: x,
           y: y,
         ),
       );
     }
+    setState(() {
+      particles = [...particles, ...newParticles];
+    });
   }
 }
 

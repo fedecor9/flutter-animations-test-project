@@ -25,6 +25,9 @@ class _MenuContent extends StatelessWidget {
       BlocBuilder<MainAnimationsMenuCubit, MainAnimationsMenuState>(
         builder: (context, state) => Scaffold(
           appBar: AppBar(
+            leading: BackButton(
+              onPressed: context.read<MainAnimationsMenuCubit>().goToHome,
+            ),
             title: const Text('Animations menu'),
           ),
           body: GridView.count(

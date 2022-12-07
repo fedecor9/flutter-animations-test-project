@@ -14,4 +14,8 @@ class MainAnimationsMenuCubit extends Cubit<MainAnimationsMenuState> {
   void goToParticlesEffect() {
     _router.topMostRouter().navigate(const ParticlesCanvasRoute());
   }
+
+  void goToHome() {
+    _router.navigate(const WelcomeScreenRoute());
+  }
 }
