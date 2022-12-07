@@ -81,10 +81,10 @@ class _Drawer extends StatelessWidget {
                         'Animations',
                         style: context.theme.textStyles.headline4,
                       ),
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ],
@@ -124,12 +124,11 @@ class _ProjectListContent extends StatelessWidget {
             SliverFixedExtentList(
               itemExtent: 200.h,
               delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final project = projects[index];
-                  return SlideInAnimation(
-                    myChild: ProjectWidget(project: project),
-                  );
-                },
+                (context, index) => SlideInAnimation(
+                  myChild: ProjectWidget(
+                    project: projects[index],
+                  ),
+                ),
                 childCount: projects.length,
               ),
             ),
@@ -138,7 +137,7 @@ class _ProjectListContent extends StatelessWidget {
                 padding: EdgeInsets.all(20.0.sp),
                 child: const Text('Made with ❤️ by Xmartlabs'),
               ),
-            )
+            ),
           ],
         ),
       );
@@ -192,37 +191,34 @@ class _MyWidgetState extends State<MyWidget>
   }
 
   @override
-  Widget build(BuildContext context) {
-    final customAnimationBuilder = AnimatedBuilder(
-      animation: controller,
-      builder: (context, child) {
-        final dx = controller.value * 100;
-        final scale = 1 - (controller.value * .3);
-        return GestureDetector(
-          onHorizontalDragUpdate: (details) {
-            if (_canBeDragged) {
-              final delta = details.primaryDelta! / 250;
-              controller.value += delta;
-            }
-          },
-          onHorizontalDragEnd: _onDragEnd,
-          onHorizontalDragStart: _onDragStart,
-          child: Transform(
-            transform: Matrix4.identity()
-              ..translate(dx)
-              ..scale(scale),
-            alignment: Alignment.centerRight,
-            child: child,
-          ),
-        );
-      },
-      child: _ProjectListContent(
-        projects: widget.projects,
-        toggle: toogle,
-      ),
-    );
-    return customAnimationBuilder;
-  }
+  Widget build(BuildContext context) => AnimatedBuilder(
+        animation: controller,
+        builder: (context, child) {
+          final dx = controller.value * 100;
+          final scale = 1 - (controller.value * .3);
+          return GestureDetector(
+            onHorizontalDragUpdate: (details) {
+              if (_canBeDragged) {
+                final delta = details.primaryDelta! / 250;
+                controller.value += delta;
+              }
+            },
+            onHorizontalDragEnd: _onDragEnd,
+            onHorizontalDragStart: _onDragStart,
+            child: Transform(
+              transform: Matrix4.identity()
+                ..translate(dx)
+                ..scale(scale),
+              alignment: Alignment.centerRight,
+              child: child,
+            ),
+          );
+        },
+        child: _ProjectListContent(
+          projects: widget.projects,
+          toggle: toogle,
+        ),
+      );
 }
 
 enum Test {

@@ -6,7 +6,6 @@ import 'package:flutter_template/core/di/di_provider.dart';
 import 'package:flutter_template/core/model/project.dart';
 import 'package:flutter_template/core/repository/project_repository.dart';
 import 'package:flutter_template/core/repository/session_repository.dart';
-import 'package:flutter_template/ui/animated_examples/main_menu/main_animations_menu.dart';
 import 'package:flutter_template/ui/app_router.dart';
 import 'package:flutter_template/ui/section/error_handler/error_handler_cubit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

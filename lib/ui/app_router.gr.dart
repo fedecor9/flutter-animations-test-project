@@ -41,6 +41,12 @@ class _$AppRouter extends RootStackRouter {
         child: const WelcomeScreen(),
       );
     },
+    AnimationsMenuRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const AnimationsMenu(),
+      );
+    },
     ParticlesCanvasRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
@@ -86,9 +92,16 @@ class _$AppRouter extends RootStackRouter {
               parent: AuthenticatedRouter.name,
             ),
             RouteConfig(
-              ParticlesCanvasRoute.name,
+              AnimationsMenuRoute.name,
               path: 'animations_menu',
               parent: AuthenticatedRouter.name,
+              children: [
+                RouteConfig(
+                  ParticlesCanvasRoute.name,
+                  path: 'particlesEffect',
+                  parent: AnimationsMenuRoute.name,
+                )
+              ],
             ),
           ],
         ),
@@ -146,12 +159,25 @@ class WelcomeScreenRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [AnimationsMenu]
+class AnimationsMenuRoute extends PageRouteInfo<void> {
+  const AnimationsMenuRoute({List<PageRouteInfo>? children})
+      : super(
+          AnimationsMenuRoute.name,
+          path: 'animations_menu',
+          initialChildren: children,
+        );
+
+  static const String name = 'AnimationsMenuRoute';
+}
+
+/// generated route for
 /// [ParticlesCanvas]
 class ParticlesCanvasRoute extends PageRouteInfo<void> {
   const ParticlesCanvasRoute()
       : super(
           ParticlesCanvasRoute.name,
-          path: 'animations_menu',
+          path: 'particlesEffect',
         );
 
   static const String name = 'ParticlesCanvasRoute';
