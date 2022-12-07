@@ -27,47 +27,67 @@ class _WelcomeContentScreen extends StatelessWidget {
           backgroundColor: const Color.fromARGB(255, 149, 216, 245),
           body: Stack(
             children: [
-              Positioned(
-                left: -40.w,
-                child: Padding(
-                  padding: EdgeInsets.only(top: 40.h),
-                  child: Image.asset(
-                    'assets/splash_branding.png',
-                    width: .7.sw,
-                    fit: BoxFit.contain,
-                    color: context.theme.colors.primary,
-                  ),
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: .22.sh,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 30.w),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextButton(
-                          onPressed: context.read<WelcomeCubit>().logOut,
-                          child: Text(
-                            'Log out',
-                            style: context.theme.textStyles.headline4,
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              MyWidget(
-                projects: state.projects,
-              )
+              const _Drawer(),
+              MyWidget(projects: state.projects),
             ],
           ),
         ),
+      );
+}
+
+class _Drawer extends StatelessWidget {
+  const _Drawer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => Stack(
+        children: [
+          Positioned(
+            left: -40.w,
+            child: Padding(
+              padding: EdgeInsets.only(top: 40.h),
+              child: Image.asset(
+                'assets/splash_branding.png',
+                width: .7.sw,
+                fit: BoxFit.contain,
+                color: context.theme.colors.primary,
+              ),
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: .22.sh,
+                width: double.infinity,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 23.w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: context.read<WelcomeCubit>().logOut,
+                      child: Text(
+                        'Log out',
+                        style: context.theme.textStyles.headline4,
+                      ),
+                    ),
+                    SizedBox(height: 15.h),
+                    TextButton(
+                      onPressed: context.read<WelcomeCubit>().goToAnimations,
+                      child: Text(
+                        'Animations',
+                        style: context.theme.textStyles.headline4,
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ],
       );
 }
 
@@ -202,5 +222,22 @@ class _MyWidgetState extends State<MyWidget>
       ),
     );
     return customAnimationBuilder;
+  }
+}
+
+enum Test {
+  a(''),
+  b('');
+
+  final String text1;
+  const Test(this.text1);
+
+  String text2(BuildContext context) {
+    switch (this) {
+      case a:
+        return 'A';
+      case b:
+        return 'B';
+    }
   }
 }

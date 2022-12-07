@@ -11,6 +11,12 @@ import 'package:flutter/widgets.dart';
 
 class Assets {
   Assets._();
+
+  static const AssetGenImage splashBranding =
+      AssetGenImage('assets/splash_branding.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [splashBranding];
 }
 
 class AssetGenImage {

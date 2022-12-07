@@ -6,6 +6,8 @@ import 'package:flutter_template/core/di/di_provider.dart';
 import 'package:flutter_template/core/model/project.dart';
 import 'package:flutter_template/core/repository/project_repository.dart';
 import 'package:flutter_template/core/repository/session_repository.dart';
+import 'package:flutter_template/ui/animated_examples/main_menu/main_animations_menu.dart';
+import 'package:flutter_template/ui/app_router.dart';
 import 'package:flutter_template/ui/section/error_handler/error_handler_cubit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -15,6 +17,7 @@ part 'welcome_state.dart';
 class WelcomeCubit extends Cubit<WelcomeBaseState> {
   final SessionRepository _sessionRepository = DiProvider.get();
   final ProjectRepository _projectRepository = DiProvider.get();
+  final AppRouter _router = DiProvider.get();
 
   final GeneralErrorHandler _errorHandler;
 
@@ -38,4 +41,7 @@ class WelcomeCubit extends Cubit<WelcomeBaseState> {
   }
 
   Future<void> logOut() => _sessionRepository.logOut().mapToResult();
+
+  Future<void> goToAnimations() =>
+      _router.navigate(const ParticlesCanvasRoute());
 }

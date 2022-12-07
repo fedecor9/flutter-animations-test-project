@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_template/ui/common/animated_drop_container.dart';
-import 'package:flutter_template/ui/common/animated_square.dart';
+import 'package:flutter_template/ui/common/animated_drop_simple_animation.dart';
 import 'package:flutter_template/ui/extensions/context_extensions.dart';
 import 'package:flutter_template/ui/section/error_handler/error_handler_cubit.dart';
 
@@ -68,14 +67,13 @@ class _SignInFormState extends State<_SignInForm> {
   void initState() {
     super.initState();
     _signInCubit = context.read<SignInCubit>();
-    // TODO: This should be bound
     _emailTextController.text = _signInCubit.state.email ?? '';
     _passwordTextController.text = _signInCubit.state.password ?? '';
   }
 
   @override
-  Widget build(BuildContext context) => DropAnimatedContainer(
-        child: Column(
+  Widget build(BuildContext context) => SimpleAnimationsDrop(
+        widget: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -103,10 +101,6 @@ class _SignInFormState extends State<_SignInForm> {
                 ),
               ),
             ),
-            // const Padding(
-            //   padding: EdgeInsets.all(8),
-            //   child: AnimatedSquare(),
-            // ),
           ],
         ),
       );

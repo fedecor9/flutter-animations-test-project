@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/ui/animated_examples/main_menu/main_animations_menu.dart';
 import 'package:flutter_template/ui/section/section_router.dart';
 import 'package:flutter_template/ui/signin/signin_screen.dart';
 import 'package:flutter_template/ui/welcome/welcome_screen.dart';
@@ -30,11 +31,16 @@ part 'app_router.gr.dart';
           page: WelcomeScreen,
           initial: true,
         ),
+        AutoRoute(
+          path: AppRouter.animationsMenu,
+          page: ParticlesCanvas,
+        ),
       ],
     ),
   ],
 )
 class AppRouter extends _$AppRouter {
   static const signInPath = 'signin';
+  static const animationsMenu = 'animations_menu';
   static const welcomePath = 'welcome';
 }
