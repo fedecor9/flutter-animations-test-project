@@ -30,31 +30,71 @@ class _MenuContent extends StatelessWidget {
             ),
             title: const Text('Animations menu'),
           ),
-          body: GridView.count(
-            crossAxisCount: 3,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: MaterialButton(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+          body: Center(
+            child: Container(
+              margin: EdgeInsets.all(10.sp),
+              child: GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: 2,
+                childAspectRatio: 1,
+                children: [
+                  Button(
+                    text: 'Particles effect',
+                    onPressed: context
+                        .read<MainAnimationsMenuCubit>()
+                        .goToParticlesEffect,
                   ),
-                  color: context.theme.colors.primary,
-                  onPressed: context
-                      .read<MainAnimationsMenuCubit>()
-                      .goToParticlesEffect,
-                  child: Center(
-                    child: Text(
-                      'Particles effect',
-                      style: context.theme.textStyles.bodyMedium!
-                          .copyWith(color: Colors.white, fontSize: 16.sp),
-                      textAlign: TextAlign.center,
-                    ),
+                  Button(
+                    text: 'Staggered animations',
+                    onPressed: context
+                        .read<MainAnimationsMenuCubit>()
+                        .goToStaggeredAnimations,
                   ),
-                ),
+                  Button(
+                    text: 'Implicit animations',
+                    onPressed: context
+                        .read<MainAnimationsMenuCubit>()
+                        .goToParticlesEffect,
+                  ),
+                  Button(
+                    text: 'Animations using custom painter/clipper',
+                    onPressed: context
+                        .read<MainAnimationsMenuCubit>()
+                        .goToParticlesEffect,
+                  ),
+                ],
               ),
-            ],
+            ),
+          ),
+        ),
+      );
+}
+
+class Button extends StatelessWidget {
+  const Button({
+    required this.text,
+    required this.onPressed,
+    Key? key,
+  }) : super(key: key);
+  final String text;
+  final void Function()? onPressed;
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: MaterialButton(
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          color: context.theme.colors.primary,
+          onPressed: onPressed,
+          child: Center(
+            child: Text(
+              text,
+              style: context.theme.textStyles.bodyMedium!
+                  .copyWith(color: Colors.white, fontSize: 16.sp),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       );

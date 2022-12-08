@@ -55,10 +55,6 @@ class _ParticleCircleTapsState extends State<ParticleCircleTaps> {
                 // setState(() {
                 //   tapVisible = !tapVisible;
                 // });
-                Future.delayed(
-                  dur,
-                  _removeParticles,
-                );
               },
               child: Container(
                 height: .4.sh,
@@ -76,7 +72,7 @@ class _ParticleCircleTapsState extends State<ParticleCircleTaps> {
 
   void _removeParticles() {
     setState(() {
-      particles = particles.slice(0, 49);
+      particles = [];
     });
   }
 
@@ -85,7 +81,7 @@ class _ParticleCircleTapsState extends State<ParticleCircleTaps> {
     for (final _ in Iterable.generate(50)) {
       newParticles.add(
         Particle(
-          // onCompleted: _removeParticles,
+          onCompleted: _removeParticles,
           x: x,
           y: y,
         ),

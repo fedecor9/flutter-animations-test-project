@@ -42,9 +42,13 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     AnimationsFlowRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
+      return CustomPage<dynamic>(
         routeData: routeData,
         child: const EmptyRouterPage(),
+        transitionsBuilder: customTransition,
+        durationInMilliseconds: 2000,
+        opaque: true,
+        barrierDismissible: false,
       );
     },
     ParticlesCanvasRoute.name: (routeData) {
@@ -54,9 +58,19 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     AnimationsMenuRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
+      return CustomPage<dynamic>(
         routeData: routeData,
         child: const AnimationsMenu(),
+        transitionsBuilder: customTransition,
+        durationInMilliseconds: 1500,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    StaggeredMenuRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const StaggeredMenu(),
       );
     },
   };
@@ -117,6 +131,11 @@ class _$AppRouter extends RootStackRouter {
                 RouteConfig(
                   AnimationsMenuRoute.name,
                   path: 'animations_menu',
+                  parent: AnimationsFlowRoute.name,
+                ),
+                RouteConfig(
+                  StaggeredMenuRoute.name,
+                  path: 'staggeredMenu',
                   parent: AnimationsFlowRoute.name,
                 ),
               ],
@@ -211,4 +230,16 @@ class AnimationsMenuRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AnimationsMenuRoute';
+}
+
+/// generated route for
+/// [StaggeredMenu]
+class StaggeredMenuRoute extends PageRouteInfo<void> {
+  const StaggeredMenuRoute()
+      : super(
+          StaggeredMenuRoute.name,
+          path: 'staggeredMenu',
+        );
+
+  static const String name = 'StaggeredMenuRoute';
 }
