@@ -54,7 +54,7 @@ class _MenuContent extends StatelessWidget {
                     text: 'Implicit animations',
                     onPressed: context
                         .read<MainAnimationsMenuCubit>()
-                        .goToParticlesEffect,
+                        .goToImplicitAnimations,
                   ),
                   Button(
                     text: 'Animations using custom painter/clipper',

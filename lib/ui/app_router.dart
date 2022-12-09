@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/ui/animated_examples/implicit_animations/implicit_animations_screen.dart';
 import 'package:flutter_template/ui/animated_examples/main_menu/main_animations_menu.dart';
 import 'package:flutter_template/ui/animated_examples/particle_effect/particle_effect.dart';
 import 'package:flutter_template/ui/animated_examples/staggered_menu/staggered_menu.dart';
@@ -41,15 +42,15 @@ part 'app_router.gr.dart';
           name: 'AnimationsFlowRoute',
           page: EmptyRouterPage,
           transitionsBuilder: customTransition,
-          durationInMilliseconds: 2000,
+          durationInMilliseconds: 1000,
           children: [
             AutoRoute(
               path: AppRouter.particlesEffect,
               page: ParticlesCanvas,
             ),
             CustomRoute(
-              transitionsBuilder: customTransition,
-              durationInMilliseconds: 1500,
+              // transitionsBuilder: customTransition,
+              // durationInMilliseconds: 1500,
               path: AppRouter.animationsMenu,
               page: AnimationsMenu,
               initial: true,
@@ -57,6 +58,10 @@ part 'app_router.gr.dart';
             AutoRoute(
               path: AppRouter.staggeredMenu,
               page: StaggeredMenu,
+            ),
+            AutoRoute(
+              path: AppRouter.implicitAnimations,
+              page: ImplicitAnimationsScreen,
             ),
           ],
         ),
@@ -70,6 +75,7 @@ class AppRouter extends _$AppRouter {
   static const welcomePath = 'welcome';
   static const particlesEffect = 'particlesEffect';
   static const staggeredMenu = 'staggeredMenu';
+  static const implicitAnimations = 'implicitAnimatons';
 }
 
 Widget customTransition(
@@ -81,7 +87,7 @@ Widget customTransition(
   final screenSize = MediaQuery.of(context).size;
   final center = Offset(screenSize.width, screenSize.height / 2);
   const beginRadius = 0.0;
-  final endRadius = screenSize.height * 1.2;
+  final endRadius = screenSize.height * 1.1;
 
   final tween = Tween<double>(begin: beginRadius, end: endRadius);
   final radiusTweenAnimation = firstAnimation.drive(tween);

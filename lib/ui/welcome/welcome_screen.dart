@@ -197,12 +197,7 @@ class _MyWidgetState extends State<MyWidget>
           final dx = controller.value * 100;
           final scale = 1 - (controller.value * .3);
           return GestureDetector(
-            onHorizontalDragUpdate: (details) {
-              if (_canBeDragged) {
-                final delta = details.primaryDelta! / 250;
-                controller.value += delta;
-              }
-            },
+            onHorizontalDragUpdate: _onDragUpdate,
             onHorizontalDragEnd: _onDragEnd,
             onHorizontalDragStart: _onDragStart,
             child: Transform(
@@ -219,6 +214,13 @@ class _MyWidgetState extends State<MyWidget>
           toggle: toogle,
         ),
       );
+
+  void _onDragUpdate(details) {
+    if (_canBeDragged) {
+      final delta = details.primaryDelta! / 250;
+      controller.value += delta;
+    }
+  }
 }
 
 enum Test {

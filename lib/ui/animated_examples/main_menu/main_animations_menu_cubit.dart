@@ -19,6 +19,10 @@ class MainAnimationsMenuCubit extends Cubit<MainAnimationsMenuState> {
     _router.topMostRouter().navigate(const StaggeredMenuRoute());
   }
 
+  void goToImplicitAnimations() {
+    _router.topMostRouter().navigate(const ImplicitAnimationsScreenRoute());
+  }
+
   void goToHome() {
     _router.navigate(const WelcomeScreenRoute());
   }

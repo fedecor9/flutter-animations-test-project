@@ -46,7 +46,7 @@ class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: const EmptyRouterPage(),
         transitionsBuilder: customTransition,
-        durationInMilliseconds: 2000,
+        durationInMilliseconds: 1000,
         opaque: true,
         barrierDismissible: false,
       );
@@ -61,8 +61,6 @@ class _$AppRouter extends RootStackRouter {
       return CustomPage<dynamic>(
         routeData: routeData,
         child: const AnimationsMenu(),
-        transitionsBuilder: customTransition,
-        durationInMilliseconds: 1500,
         opaque: true,
         barrierDismissible: false,
       );
@@ -71,6 +69,12 @@ class _$AppRouter extends RootStackRouter {
       return MaterialPageX<dynamic>(
         routeData: routeData,
         child: const StaggeredMenu(),
+      );
+    },
+    ImplicitAnimationsScreenRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const ImplicitAnimationsScreen(),
       );
     },
   };
@@ -136,6 +140,11 @@ class _$AppRouter extends RootStackRouter {
                 RouteConfig(
                   StaggeredMenuRoute.name,
                   path: 'staggeredMenu',
+                  parent: AnimationsFlowRoute.name,
+                ),
+                RouteConfig(
+                  ImplicitAnimationsScreenRoute.name,
+                  path: 'implicitAnimatons',
                   parent: AnimationsFlowRoute.name,
                 ),
               ],
@@ -242,4 +251,16 @@ class StaggeredMenuRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'StaggeredMenuRoute';
+}
+
+/// generated route for
+/// [ImplicitAnimationsScreen]
+class ImplicitAnimationsScreenRoute extends PageRouteInfo<void> {
+  const ImplicitAnimationsScreenRoute()
+      : super(
+          ImplicitAnimationsScreenRoute.name,
+          path: 'implicitAnimatons',
+        );
+
+  static const String name = 'ImplicitAnimationsScreenRoute';
 }

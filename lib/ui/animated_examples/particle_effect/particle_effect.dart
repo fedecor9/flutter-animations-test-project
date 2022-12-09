@@ -1,4 +1,3 @@
-import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/ui/animated_examples/particle_effect/particle/particle.dart';
@@ -52,9 +51,6 @@ class _ParticleCircleTapsState extends State<ParticleCircleTaps> {
                   x: details.localPosition.dx,
                   y: details.localPosition.dy,
                 );
-                // setState(() {
-                //   tapVisible = !tapVisible;
-                // });
               },
               child: Container(
                 height: .4.sh,
