@@ -52,7 +52,7 @@ part 'app_router.gr.dart';
             CustomRoute(
               page: CardDetailsScreen,
               path: AppRouter.demoCardDetails,
-              transitionsBuilder: TransitionsBuilders.noTransition,
+              transitionsBuilder: TransitionsBuilders.fadeIn,
             )
           ],
         ),

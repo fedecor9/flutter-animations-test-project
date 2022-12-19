@@ -96,84 +96,91 @@ class _BottomPart extends StatelessWidget {
   Widget build(BuildContext context) => Positioned(
         bottom: 0,
         child: FadeIn(
-          child: CustomPaint(
-            painter: RPSCustomPainter(),
-            child: SizedBox(
-              height: .31.sh,
-              width: 1.sw,
-              child: Stack(
-                children: [
-                  Positioned(
-                    left: 25,
-                    top: 60,
-                    child: Text(
-                      'Popular Categories',
-                      style: TextStyle(
-                        fontSize: 22.sp,
-                        fontWeight: FontWeight.w500,
-                        color: const Color.fromARGB(255, 87, 70, 76),
+          child: Hero(
+            tag: 'bottom',
+            transitionOnUserGestures: true,
+            child: CustomPaint(
+              painter: RPSCustomPainter(),
+              child: SizedBox(
+                height: .31.sh,
+                width: 1.sw,
+                child: Material(
+                  type: MaterialType.transparency, // likely needed
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: 25,
+                        top: 60,
+                        child: Text(
+                          'Popular Categories',
+                          style: TextStyle(
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.w500,
+                            color: const Color.fromARGB(255, 87, 70, 76),
+                          ),
+                        ),
                       ),
-                    ),
+                      Positioned(
+                        right: 25,
+                        top: 65,
+                        child: Text(
+                          'See all',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                            color: const Color.fromARGB(169, 87, 70, 76),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          margin: EdgeInsets.only(top: 35.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CicleOption(
+                                color: const Color.fromARGB(180, 149, 125, 173),
+                                icon: const FaIcon(
+                                  FontAwesomeIcons.umbrellaBeach,
+                                  color: Colors.white,
+                                ),
+                                text: 'Beach',
+                              ),
+                              CicleOption(
+                                color: const Color(0xFFFFDFD3),
+                                icon: const FaIcon(
+                                  FontAwesomeIcons.car,
+                                  color: Colors.white,
+                                ),
+                                text: 'Car',
+                                delay: const Duration(milliseconds: 250),
+                              ),
+                              CicleOption(
+                                color: const Color.fromARGB(255, 254, 200, 216),
+                                icon: const FaIcon(
+                                  FontAwesomeIcons.tent,
+                                  color: Colors.white,
+                                ),
+                                text: 'Camping',
+                                delay: const Duration(milliseconds: 500),
+                              ),
+                              CicleOption(
+                                color: const Color.fromARGB(175, 80, 189, 216),
+                                icon: const FaIcon(
+                                  FontAwesomeIcons.utensils,
+                                  color: Colors.white,
+                                ),
+                                text: 'Food',
+                                delay: const Duration(milliseconds: 750),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                  Positioned(
-                    right: 25,
-                    top: 65,
-                    child: Text(
-                      'See all',
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                        color: const Color.fromARGB(169, 87, 70, 76),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Container(
-                      margin: EdgeInsets.only(top: 35.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CicleOption(
-                            color: const Color.fromARGB(180, 149, 125, 173),
-                            icon: const FaIcon(
-                              FontAwesomeIcons.umbrellaBeach,
-                              color: Colors.white,
-                            ),
-                            text: 'Beach',
-                          ),
-                          CicleOption(
-                            color: const Color(0xFFFFDFD3),
-                            icon: const FaIcon(
-                              FontAwesomeIcons.car,
-                              color: Colors.white,
-                            ),
-                            text: 'Car',
-                            delay: const Duration(milliseconds: 250),
-                          ),
-                          CicleOption(
-                            color: const Color.fromARGB(255, 254, 200, 216),
-                            icon: const FaIcon(
-                              FontAwesomeIcons.tent,
-                              color: Colors.white,
-                            ),
-                            text: 'Camping',
-                            delay: const Duration(milliseconds: 500),
-                          ),
-                          CicleOption(
-                            color: const Color.fromARGB(175, 80, 189, 216),
-                            icon: const FaIcon(
-                              FontAwesomeIcons.utensils,
-                              color: Colors.white,
-                            ),
-                            text: 'Food',
-                            delay: const Duration(milliseconds: 750),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
+                ),
               ),
             ),
           ),
@@ -393,14 +400,17 @@ class _SliderState extends State<_Slider> {
             itemCount: Places.values.length,
             itemBuilder: (context, index) => AnimatedBuilder(
               animation: _notifier,
-              builder: (context, _) => CustomCard(
-                description: Places.values[index].description,
-                image: Places.values[index].image,
-                title: Places.values[index].title,
-                onTap: () => context
-                    .read<HomeCubit>()
-                    .goToImageDetails(Places.values[index]),
-                offset: (_notifier.value - index).clamp(-1, 1).toDouble(),
+              builder: (context, _) => Hero(
+                tag: Places.values[index].title,
+                child: CustomCard(
+                  description: Places.values[index].description,
+                  image: Places.values[index].image,
+                  title: Places.values[index].title,
+                  onTap: () => context
+                      .read<HomeCubit>()
+                      .goToImageDetails(Places.values[index]),
+                  offset: (_notifier.value - index).clamp(-1, 1).toDouble(),
+                ),
               ),
             ),
           ),

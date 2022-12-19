@@ -21,7 +21,8 @@ class CustomCard extends StatelessWidget {
   final void Function()? onTap;
 
   @override
-  Widget build(BuildContext context) => SizedBox(
+  Widget build(BuildContext context) => Material(
+        color: Colors.transparent,
         child: Card(
           elevation: 16,
           shadowColor: const Color.fromARGB(100, 0, 0, 0),
@@ -33,13 +34,10 @@ class CustomCard extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: onTap,
-                child: Hero(
-                  tag: title,
-                  child: _BackgroundImage(
-                    image: image,
-                    offset: offset,
-                    rounded: rounded,
-                  ),
+                child: _BackgroundImage(
+                  image: image,
+                  offset: offset,
+                  rounded: rounded,
                 ),
               ),
               rounded
@@ -55,8 +53,8 @@ class CustomCard extends StatelessWidget {
                   : Container(),
               Container(
                 margin: EdgeInsets.symmetric(
-                  horizontal: rounded ? 20.w : 30.w,
-                  vertical: rounded ? 15.h : 55.h,
+                  horizontal: rounded ? 20.w : 35.w,
+                  vertical: rounded ? 15.h : 65.h,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,

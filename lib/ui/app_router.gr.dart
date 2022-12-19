@@ -76,7 +76,7 @@ class _$AppRouter extends RootStackRouter {
           place: args.place,
           key: args.key,
         ),
-        transitionsBuilder: TransitionsBuilders.noTransition,
+        transitionsBuilder: TransitionsBuilders.fadeIn,
         opaque: true,
         barrierDismissible: false,
       );

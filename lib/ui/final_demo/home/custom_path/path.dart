@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 class RPSCustomPainter extends CustomPainter {
+  final Color? color;
+
+  RPSCustomPainter({this.color});
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint0 = Paint()
-      ..color = const Color.fromARGB(255, 255, 255, 255)
+      ..color = color ?? Colors.white
       ..style = PaintingStyle.fill
       ..strokeWidth = 1;
 
