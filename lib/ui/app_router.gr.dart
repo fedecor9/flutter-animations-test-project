@@ -63,7 +63,8 @@ class _$AppRouter extends RootStackRouter {
       return CustomPage<dynamic>(
         routeData: routeData,
         child: const Home(),
-        transitionsBuilder: TransitionsBuilders.noTransition,
+        transitionsBuilder: TransitionsBuilders.fadeIn,
+        durationInMilliseconds: 300,
         opaque: true,
         barrierDismissible: false,
       );
@@ -77,6 +78,7 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
         ),
         transitionsBuilder: TransitionsBuilders.fadeIn,
+        durationInMilliseconds: 300,
         opaque: true,
         barrierDismissible: false,
       );

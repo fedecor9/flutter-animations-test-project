@@ -47,11 +47,13 @@ part 'app_router.gr.dart';
               page: Home,
               path: AppRouter.demoHome,
               initial: true,
-              transitionsBuilder: TransitionsBuilders.noTransition,
+              durationInMilliseconds: 300,
+              transitionsBuilder: TransitionsBuilders.fadeIn,
             ),
             CustomRoute(
               page: CardDetailsScreen,
               path: AppRouter.demoCardDetails,
+              durationInMilliseconds: 300,
               transitionsBuilder: TransitionsBuilders.fadeIn,
             )
           ],

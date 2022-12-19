@@ -98,7 +98,6 @@ class _BottomPart extends StatelessWidget {
         child: FadeIn(
           child: Hero(
             tag: 'bottom',
-            transitionOnUserGestures: true,
             child: CustomPaint(
               painter: RPSCustomPainter(),
               child: SizedBox(
@@ -193,7 +192,7 @@ class CicleOption extends StatelessWidget {
     required this.icon,
     required this.text,
     required this.color,
-    this.delay = const Duration(seconds: 0),
+    this.delay = Duration.zero,
     Key? key,
   }) : super(key: key);
   final Color color;
@@ -206,9 +205,10 @@ class CicleOption extends StatelessWidget {
       begin: const Duration(seconds: 0),
       duration: const Duration(seconds: 1),
     ).tween('scale', Tween<double>(begin: 0, end: 1));
+
   @override
   Widget build(BuildContext context) => PlayAnimationBuilder(
-        delay: delay,
+        delay: const Duration(milliseconds: 190) + delay,
         tween: tween,
         duration: tween.duration,
         builder: (context, value, child) => Transform.scale(
@@ -421,14 +421,17 @@ class _SliderState extends State<_Slider> {
 class FadeIn extends StatelessWidget {
   const FadeIn({
     required this.child,
+    this.delay = Duration.zero,
     super.key,
   });
   final Widget child;
+  final Duration delay;
 
   @override
   Widget build(BuildContext context) => PlayAnimationBuilder(
         tween: Tween<double>(begin: 0, end: 1),
-        duration: const Duration(seconds: 1),
+        duration: const Duration(milliseconds: 700),
+        delay: const Duration(milliseconds: 200) + delay,
         builder: (context, value, widget) => Opacity(
           opacity: value,
           child: widget,
