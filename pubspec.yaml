@@ -44,7 +44,7 @@ dependencies:
   rxdart: 0.27.7
   sqflite: 2.2.0+3
   stack_trace: 1.10.0
-  stock: 1.0.0
+  stock: ^1.0.1
   simple_animations: 5.0.0+3
   font_awesome_flutter: 10.3.0
 
