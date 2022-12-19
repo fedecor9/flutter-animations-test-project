@@ -53,8 +53,8 @@ class CustomCard extends StatelessWidget {
                   : Container(),
               Container(
                 margin: EdgeInsets.symmetric(
-                  horizontal: rounded ? 20.w : 35.w,
-                  vertical: rounded ? 15.h : 65.h,
+                  horizontal: rounded ? 20.w : 28.w,
+                  vertical: rounded ? 15.h : 80.h,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,

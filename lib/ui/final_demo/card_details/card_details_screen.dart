@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -96,8 +98,7 @@ class _Bottom extends StatelessWidget {
                                 'Recommended',
                                 style: TextStyle(
                                   fontSize: 18.sp,
-                                  color:
-                                      const Color.fromARGB(255, 222, 151, 172),
+                                  color: const Color.fromARGB(255, 87, 70, 76),
                                 ),
                               ),
                             )
@@ -106,6 +107,40 @@ class _Bottom extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Positioned(
+                    bottom: 60.h,
+                    child: FadeIn(
+                      child: Container(
+                        width: 1.sw,
+                        padding: EdgeInsets.symmetric(horizontal: 22.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Description',
+                              style: TextStyle(
+                                fontSize: 20.sp,
+                                color: const Color.fromARGB(255, 87, 70, 76),
+                              ),
+                            ),
+                            SizedBox(height: 5.h),
+                            Text(
+                              'Lorem ipsum dolor sit amet, consectetur adipiscing'
+                              ' elit. Sed facilisis eros lectus, eleifend '
+                              'scelerisque ex fringilla vel. Integer metus lorem, '
+                              'finibus sit amet mauris sit amet, convallis '
+                              ' tristique molestie a eget metus. Orci varius '
+                              'natoque penatibus et magnis.',
+                              style: TextStyle(
+                                fontSize: 15.sp,
+                                color: const Color.fromARGB(255, 222, 151, 172),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
