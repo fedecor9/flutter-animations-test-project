@@ -43,4 +43,6 @@ class WelcomeCubit extends Cubit<WelcomeBaseState> {
 
   Future<void> goToAnimations() =>
       _router.navigate(const AnimationsFlowRoute());
+
+  Future<void> goToDemo() => _router.navigate(const DemoFlow());
 }

@@ -82,6 +82,14 @@ class _Drawer extends StatelessWidget {
                         style: context.theme.textStyles.headline4,
                       ),
                     ),
+                    SizedBox(height: 15.h),
+                    TextButton(
+                      onPressed: context.read<WelcomeCubit>().goToDemo,
+                      child: Text(
+                        'Demo',
+                        style: context.theme.textStyles.headline4,
+                      ),
+                    ),
                   ],
                 ),
               ),

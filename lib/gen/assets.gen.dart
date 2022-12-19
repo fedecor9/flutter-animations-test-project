@@ -9,9 +9,33 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/forest.jpg
+  AssetGenImage get forest => const AssetGenImage('assets/images/forest.jpg');
+
+  /// File path: assets/images/river.jpg
+  AssetGenImage get river => const AssetGenImage('assets/images/river.jpg');
+
+  /// File path: assets/images/space.jpg
+  AssetGenImage get space => const AssetGenImage('assets/images/space.jpg');
+
+  /// File path: assets/images/waterfall.jpg
+  AssetGenImage get waterfall =>
+      const AssetGenImage('assets/images/waterfall.jpg');
+
+  /// File path: assets/images/winter.jpg
+  AssetGenImage get winter => const AssetGenImage('assets/images/winter.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [forest, river, space, waterfall, winter];
+}
+
 class Assets {
   Assets._();
 
+  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const AssetGenImage splashBranding =
       AssetGenImage('assets/splash_branding.png');
 

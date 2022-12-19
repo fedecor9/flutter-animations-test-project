@@ -41,12 +41,42 @@ class _$AppRouter extends RootStackRouter {
         child: const WelcomeScreen(),
       );
     },
+    DemoFlow.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const HeroEmptyRouterPage(),
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     AnimationsFlowRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
         child: const EmptyRouterPage(),
         transitionsBuilder: customTransition,
         durationInMilliseconds: 1000,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    HomeRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const Home(),
+        transitionsBuilder: TransitionsBuilders.noTransition,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    CardDetailsScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<CardDetailsScreenRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: CardDetailsScreen(
+          place: args.place,
+          key: args.key,
+        ),
+        transitionsBuilder: TransitionsBuilders.noTransition,
         opaque: true,
         barrierDismissible: false,
       );
@@ -75,6 +105,12 @@ class _$AppRouter extends RootStackRouter {
       return MaterialPageX<dynamic>(
         routeData: routeData,
         child: const ImplicitAnimationsScreen(),
+      );
+    },
+    TestWidgetRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const TestWidget(),
       );
     },
   };
@@ -116,6 +152,30 @@ class _$AppRouter extends RootStackRouter {
               parent: AuthenticatedRouter.name,
             ),
             RouteConfig(
+              DemoFlow.name,
+              path: 'finalDemoFlow',
+              parent: AuthenticatedRouter.name,
+              children: [
+                RouteConfig(
+                  '#redirect',
+                  path: '',
+                  parent: DemoFlow.name,
+                  redirectTo: 'demoHome',
+                  fullMatch: true,
+                ),
+                RouteConfig(
+                  HomeRoute.name,
+                  path: 'demoHome',
+                  parent: DemoFlow.name,
+                ),
+                RouteConfig(
+                  CardDetailsScreenRoute.name,
+                  path: 'demoCardDetails',
+                  parent: DemoFlow.name,
+                ),
+              ],
+            ),
+            RouteConfig(
               AnimationsFlowRoute.name,
               path: 'AnimationsFlow',
               parent: AuthenticatedRouter.name,
@@ -145,6 +205,11 @@ class _$AppRouter extends RootStackRouter {
                 RouteConfig(
                   ImplicitAnimationsScreenRoute.name,
                   path: 'implicitAnimatons',
+                  parent: AnimationsFlowRoute.name,
+                ),
+                RouteConfig(
+                  TestWidgetRoute.name,
+                  path: 'TestHero',
                   parent: AnimationsFlowRoute.name,
                 ),
               ],
@@ -205,6 +270,19 @@ class WelcomeScreenRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [HeroEmptyRouterPage]
+class DemoFlow extends PageRouteInfo<void> {
+  const DemoFlow({List<PageRouteInfo>? children})
+      : super(
+          DemoFlow.name,
+          path: 'finalDemoFlow',
+          initialChildren: children,
+        );
+
+  static const String name = 'DemoFlow';
+}
+
+/// generated route for
 /// [EmptyRouterPage]
 class AnimationsFlowRoute extends PageRouteInfo<void> {
   const AnimationsFlowRoute({List<PageRouteInfo>? children})
@@ -215,6 +293,52 @@ class AnimationsFlowRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AnimationsFlowRoute';
+}
+
+/// generated route for
+/// [Home]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute()
+      : super(
+          HomeRoute.name,
+          path: 'demoHome',
+        );
+
+  static const String name = 'HomeRoute';
+}
+
+/// generated route for
+/// [CardDetailsScreen]
+class CardDetailsScreenRoute extends PageRouteInfo<CardDetailsScreenRouteArgs> {
+  CardDetailsScreenRoute({
+    required Places place,
+    Key? key,
+  }) : super(
+          CardDetailsScreenRoute.name,
+          path: 'demoCardDetails',
+          args: CardDetailsScreenRouteArgs(
+            place: place,
+            key: key,
+          ),
+        );
+
+  static const String name = 'CardDetailsScreenRoute';
+}
+
+class CardDetailsScreenRouteArgs {
+  const CardDetailsScreenRouteArgs({
+    required this.place,
+    this.key,
+  });
+
+  final Places place;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CardDetailsScreenRouteArgs{place: $place, key: $key}';
+  }
 }
 
 /// generated route for
@@ -263,4 +387,16 @@ class ImplicitAnimationsScreenRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ImplicitAnimationsScreenRoute';
+}
+
+/// generated route for
+/// [TestWidget]
+class TestWidgetRoute extends PageRouteInfo<void> {
+  const TestWidgetRoute()
+      : super(
+          TestWidgetRoute.name,
+          path: 'TestHero',
+        );
+
+  static const String name = 'TestWidgetRoute';
 }

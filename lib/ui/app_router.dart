@@ -5,8 +5,9 @@ import 'package:flutter_template/ui/animated_examples/implicit_animations/implic
 import 'package:flutter_template/ui/animated_examples/main_menu/main_animations_menu.dart';
 import 'package:flutter_template/ui/animated_examples/particle_effect/particle_effect.dart';
 import 'package:flutter_template/ui/animated_examples/staggered_menu/staggered_menu.dart';
-import 'package:flutter_template/ui/animated_examples/staggered_menu/staggered_menu_cubit.dart';
 import 'package:flutter_template/ui/common/circle_reveal_clipper.dart';
+import 'package:flutter_template/ui/final_demo/card_details/card_details_screen.dart';
+import 'package:flutter_template/ui/final_demo/home/home.dart';
 import 'package:flutter_template/ui/section/section_router.dart';
 import 'package:flutter_template/ui/signin/signin_screen.dart';
 import 'package:flutter_template/ui/welcome/welcome_screen.dart';
@@ -38,6 +39,24 @@ part 'app_router.gr.dart';
           initial: true,
         ),
         CustomRoute(
+          name: 'DemoFlow',
+          page: HeroEmptyRouterPage,
+          path: AppRouter.finalDemoFlow,
+          children: [
+            CustomRoute(
+              page: Home,
+              path: AppRouter.demoHome,
+              initial: true,
+              transitionsBuilder: TransitionsBuilders.noTransition,
+            ),
+            CustomRoute(
+              page: CardDetailsScreen,
+              path: AppRouter.demoCardDetails,
+              transitionsBuilder: TransitionsBuilders.noTransition,
+            )
+          ],
+        ),
+        CustomRoute(
           path: 'AnimationsFlow',
           name: 'AnimationsFlowRoute',
           page: EmptyRouterPage,
@@ -49,8 +68,6 @@ part 'app_router.gr.dart';
               page: ParticlesCanvas,
             ),
             CustomRoute(
-              // transitionsBuilder: customTransition,
-              // durationInMilliseconds: 1500,
               path: AppRouter.animationsMenu,
               page: AnimationsMenu,
               initial: true,
@@ -62,6 +79,10 @@ part 'app_router.gr.dart';
             AutoRoute(
               path: AppRouter.implicitAnimations,
               page: ImplicitAnimationsScreen,
+            ),
+            AutoRoute(
+              path: 'TestHero',
+              page: TestWidget,
             ),
           ],
         ),
@@ -76,6 +97,9 @@ class AppRouter extends _$AppRouter {
   static const particlesEffect = 'particlesEffect';
   static const staggeredMenu = 'staggeredMenu';
   static const implicitAnimations = 'implicitAnimatons';
+  static const finalDemoFlow = 'finalDemoFlow';
+  static const demoHome = 'demoHome';
+  static const demoCardDetails = 'demoCardDetails';
 }
 
 Widget customTransition(
@@ -96,4 +120,14 @@ Widget customTransition(
         CircleRevealClipper(center: center, radius: radiusTweenAnimation.value),
     child: child,
   );
+}
+
+class HeroEmptyRouterPage extends StatelessWidget {
+  const HeroEmptyRouterPage({super.key});
+
+  @override
+  Widget build(BuildContext context) => HeroControllerScope(
+        controller: HeroController(),
+        child: const AutoRouter(),
+      );
 }
