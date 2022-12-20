@@ -39,10 +39,9 @@ class WelcomeCubit extends Cubit<WelcomeBaseState> {
     await super.close();
   }
 
-  Future<void> logOut() => _sessionRepository.logOut().mapToResult();
+  void logOut() => _sessionRepository.logOut().mapToResult();
 
-  Future<void> goToAnimations() =>
-      _router.navigate(const AnimationsFlowRoute());
+  void goToAnimations() => _router.navigate(const AnimationsFlowRoute());
 
-  Future<void> goToDemo() => _router.navigate(const DemoFlow());
+  void goToDemo() => _router.navigate(const DemoFlow());
 }

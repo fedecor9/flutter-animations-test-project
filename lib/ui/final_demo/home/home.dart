@@ -45,7 +45,7 @@ class Home extends StatelessWidget {
                     size: 35,
                     color: Color.fromARGB(151, 218, 178, 191),
                   ),
-                )
+                ),
               ],
               elevation: 0,
             ),
@@ -176,7 +176,7 @@ class _BottomPart extends StatelessWidget {
                             ],
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -208,7 +208,7 @@ class CicleOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => PlayAnimationBuilder(
-        delay: const Duration(milliseconds: 190) + delay,
+        delay: const Duration(milliseconds: 240) + delay,
         tween: tween,
         duration: tween.duration,
         builder: (context, value, child) => Transform.scale(
@@ -261,65 +261,47 @@ class _Tabs extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: 9.w,
               ),
-              child: InkWell(
-                onTap: () {
-                  print('Here');
-                },
-                radius: 20,
-                child: Container(
-                  margin: EdgeInsets.only(left: 8.w),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.w,
-                  ),
-                  child: Text(
-                    'Best nature',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 17.sp,
-                      fontWeight: FontWeight.bold,
-                      color: const Color.fromARGB(255, 87, 70, 76),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                print('Here');
-              },
-              borderRadius: BorderRadius.circular(22),
-              child: Padding(
+              child: Container(
+                margin: EdgeInsets.only(left: 8.w),
                 padding: EdgeInsets.symmetric(
                   horizontal: 10.w,
                 ),
                 child: Text(
-                  'Most viewed',
+                  'Best nature',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 17.sp,
                     fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(125, 87, 70, 76),
+                    color: const Color.fromARGB(255, 87, 70, 76),
                   ),
                 ),
               ),
             ),
-            InkWell(
-              onTap: () {
-                print('Here');
-              },
-              radius: 20,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.w,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.w,
+              ),
+              child: Text(
+                'Most viewed',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 17.sp,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(125, 87, 70, 76),
                 ),
-                child: Text(
-                  'Recommended',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 17.sp,
-                    fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(125, 87, 70, 76),
-                  ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.w,
+              ),
+              child: Text(
+                'Recommended',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 17.sp,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(125, 87, 70, 76),
                 ),
               ),
             ),
@@ -337,8 +319,6 @@ class _Slider extends StatefulWidget {
   @override
   State<_Slider> createState() => _SliderState();
 }
-
-final placesList = [];
 
 class _SliderState extends State<_Slider> {
   late PageController pageController;

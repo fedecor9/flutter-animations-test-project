@@ -61,7 +61,7 @@ class _ParticleCircleTapsState extends State<ParticleCircleTaps> {
                 ),
               ),
             ),
-            ...particles
+            ...particles,
           ],
         ),
       );
@@ -124,7 +124,7 @@ class _ParticleTapsState extends State<ParticleTaps> {
                     ),
                   )
                 : Container(),
-            ...particles.map((e) => const Particle())
+            ...particles.map((e) => const Particle()),
           ],
         ),
       );

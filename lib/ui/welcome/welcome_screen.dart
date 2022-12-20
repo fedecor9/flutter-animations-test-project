@@ -230,20 +230,3 @@ class _MyWidgetState extends State<MyWidget>
     }
   }
 }
-
-enum Test {
-  a(''),
-  b('');
-
-  final String text1;
-  const Test(this.text1);
-
-  String text2(BuildContext context) {
-    switch (this) {
-      case a:
-        return 'A';
-      case b:
-        return 'B';
-    }
-  }
-}

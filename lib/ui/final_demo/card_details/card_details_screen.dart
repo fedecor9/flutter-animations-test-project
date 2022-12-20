@@ -91,7 +91,9 @@ class _Bottom extends StatelessWidget {
                         child: Row(
                           children: [
                             const Expanded(child: _StackedCircles()),
-                            SizedBox(width: 10.w),
+                            SizedBox(
+                              width: 10.w,
+                            ),
                             Expanded(
                               flex: 2,
                               child: Text(
@@ -101,7 +103,7 @@ class _Bottom extends StatelessWidget {
                                   color: const Color.fromARGB(255, 87, 70, 76),
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -140,7 +142,7 @@ class _Bottom extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -186,7 +188,7 @@ class _StackedCircles extends StatelessWidget {
                   style: const TextStyle(color: Colors.white),
                 ),
               ),
-            )
+            ),
           ],
         ),
       );
@@ -226,7 +228,7 @@ class _Middle extends StatelessWidget {
                             color: Colors.amber,
                             fontSize: 12.sp,
                           ),
-                        )
+                        ),
                       ],
                     ),
                     Row(
@@ -243,7 +245,7 @@ class _Middle extends StatelessWidget {
                             color: Colors.lightBlue,
                             fontSize: 12.sp,
                           ),
-                        )
+                        ),
                       ],
                     ),
                     Row(
@@ -265,7 +267,7 @@ class _Middle extends StatelessWidget {
                             ),
                             fontSize: 12.sp,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ],

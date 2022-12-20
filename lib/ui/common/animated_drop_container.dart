@@ -29,12 +29,7 @@ class _DropAnimatedContainerState extends State<DropAnimatedContainer>
         curve: Curves.bounceOut,
       ),
     );
-
-    controller
-      ..forward()
-      ..addListener(() {
-        setState(() {});
-      });
+    controller.forward();
   }
 
   @override
@@ -44,10 +39,14 @@ class _DropAnimatedContainerState extends State<DropAnimatedContainer>
   }
 
   @override
-  Widget build(BuildContext context) => Transform.translate(
-        offset: Offset(0, dropAnimation.value),
-        child: Container(
-          child: widget.child,
+  Widget build(BuildContext context) => AnimatedBuilder(
+        builder: (context, child) => Transform.translate(
+          offset: Offset(0, dropAnimation.value),
+          child: Container(
+            child: child,
+          ),
         ),
+        animation: controller,
+        child: widget.child,
       );
 }

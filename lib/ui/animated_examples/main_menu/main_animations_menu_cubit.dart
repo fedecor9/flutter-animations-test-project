@@ -24,7 +24,7 @@ class MainAnimationsMenuCubit extends Cubit<MainAnimationsMenuState> {
   }
 
   void goToTest() {
-    _router.topMostRouter().navigate(TestWidgetRoute());
+    _router.topMostRouter().navigate(const TestWidgetRoute());
   }
 
   void goToHome() {

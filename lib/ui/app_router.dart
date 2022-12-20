@@ -55,7 +55,7 @@ part 'app_router.gr.dart';
               path: AppRouter.demoCardDetails,
               durationInMilliseconds: 300,
               transitionsBuilder: TransitionsBuilders.fadeIn,
-            )
+            ),
           ],
         ),
         CustomRoute(

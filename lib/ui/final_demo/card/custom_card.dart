@@ -40,48 +40,69 @@ class CustomCard extends StatelessWidget {
                   rounded: rounded,
                 ),
               ),
-              rounded
-                  ? const Positioned(
-                      right: 15,
-                      top: 15,
-                      child: Icon(
-                        Icons.bookmark,
-                        size: 35,
-                        color: Color.fromARGB(255, 195, 147, 163),
-                      ),
-                    )
-                  : Container(),
-              Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: rounded ? 20.w : 28.w,
-                  vertical: rounded ? 15.h : 80.h,
+              Positioned(
+                right: 15,
+                top: 15,
+                child: Visibility(
+                  visible: rounded,
+                  child: const Icon(
+                    Icons.bookmark,
+                    size: 35,
+                    color: Color.fromARGB(255, 195, 147, 163),
+                  ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(height: 10.h),
-                    Text(
-                      description,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              )
+              ),
+              _ImageDescription(
+                rounded: rounded,
+                title: title,
+                description: description,
+              ),
             ],
           ),
+        ),
+      );
+}
+
+class _ImageDescription extends StatelessWidget {
+  const _ImageDescription({
+    required this.rounded,
+    required this.title,
+    required this.description,
+    Key? key,
+  }) : super(key: key);
+
+  final bool rounded;
+  final String title;
+  final String description;
+
+  @override
+  Widget build(BuildContext context) => Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: rounded ? 20.w : 28.w,
+          vertical: rounded ? 15.h : 80.h,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                color: const Color.fromARGB(255, 255, 255, 255),
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: 10.h),
+            Text(
+              description,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
         ),
       );
 }
