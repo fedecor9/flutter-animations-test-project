@@ -54,7 +54,7 @@ class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: const EmptyRouterPage(),
         transitionsBuilder: customTransition,
-        durationInMilliseconds: 1000,
+        durationInMilliseconds: 500,
         opaque: true,
         barrierDismissible: false,
       );
@@ -109,10 +109,28 @@ class _$AppRouter extends RootStackRouter {
         child: const ImplicitAnimationsScreen(),
       );
     },
-    TestWidgetRoute.name: (routeData) {
+    AnimatedSwitcherFlowRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const TestWidget(),
+        child: const EmptyRouterPage(),
+      );
+    },
+    AnimatedSwitcherMenuRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const AnimatedSwitcherMenu(),
+      );
+    },
+    AdvancedAnimatedSwitcherRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const AdvancedAnimatedSwitcher(),
+      );
+    },
+    BasicAnimatedSwitcherRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const BasicAnimatedSwitcher(),
       );
     },
   };
@@ -210,9 +228,33 @@ class _$AppRouter extends RootStackRouter {
                   parent: AnimationsFlowRoute.name,
                 ),
                 RouteConfig(
-                  TestWidgetRoute.name,
-                  path: 'TestHero',
+                  AnimatedSwitcherFlowRoute.name,
+                  path: 'AnimatedSwitcherFlow',
                   parent: AnimationsFlowRoute.name,
+                  children: [
+                    RouteConfig(
+                      '#redirect',
+                      path: '',
+                      parent: AnimatedSwitcherFlowRoute.name,
+                      redirectTo: 'animatedSwitcherDemo',
+                      fullMatch: true,
+                    ),
+                    RouteConfig(
+                      AnimatedSwitcherMenuRoute.name,
+                      path: 'animatedSwitcherDemo',
+                      parent: AnimatedSwitcherFlowRoute.name,
+                    ),
+                    RouteConfig(
+                      AdvancedAnimatedSwitcherRoute.name,
+                      path: 'advancedAnimatedSwitcher',
+                      parent: AnimatedSwitcherFlowRoute.name,
+                    ),
+                    RouteConfig(
+                      BasicAnimatedSwitcherRoute.name,
+                      path: 'basicAnimatedSwitcher',
+                      parent: AnimatedSwitcherFlowRoute.name,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -392,13 +434,50 @@ class ImplicitAnimationsScreenRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [TestWidget]
-class TestWidgetRoute extends PageRouteInfo<void> {
-  const TestWidgetRoute()
+/// [EmptyRouterPage]
+class AnimatedSwitcherFlowRoute extends PageRouteInfo<void> {
+  const AnimatedSwitcherFlowRoute({List<PageRouteInfo>? children})
       : super(
-          TestWidgetRoute.name,
-          path: 'TestHero',
+          AnimatedSwitcherFlowRoute.name,
+          path: 'AnimatedSwitcherFlow',
+          initialChildren: children,
         );
 
-  static const String name = 'TestWidgetRoute';
+  static const String name = 'AnimatedSwitcherFlowRoute';
+}
+
+/// generated route for
+/// [AnimatedSwitcherMenu]
+class AnimatedSwitcherMenuRoute extends PageRouteInfo<void> {
+  const AnimatedSwitcherMenuRoute()
+      : super(
+          AnimatedSwitcherMenuRoute.name,
+          path: 'animatedSwitcherDemo',
+        );
+
+  static const String name = 'AnimatedSwitcherMenuRoute';
+}
+
+/// generated route for
+/// [AdvancedAnimatedSwitcher]
+class AdvancedAnimatedSwitcherRoute extends PageRouteInfo<void> {
+  const AdvancedAnimatedSwitcherRoute()
+      : super(
+          AdvancedAnimatedSwitcherRoute.name,
+          path: 'advancedAnimatedSwitcher',
+        );
+
+  static const String name = 'AdvancedAnimatedSwitcherRoute';
+}
+
+/// generated route for
+/// [BasicAnimatedSwitcher]
+class BasicAnimatedSwitcherRoute extends PageRouteInfo<void> {
+  const BasicAnimatedSwitcherRoute()
+      : super(
+          BasicAnimatedSwitcherRoute.name,
+          path: 'basicAnimatedSwitcher',
+        );
+
+  static const String name = 'BasicAnimatedSwitcherRoute';
 }

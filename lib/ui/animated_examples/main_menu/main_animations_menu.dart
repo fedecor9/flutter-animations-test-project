@@ -56,14 +56,11 @@ class _MenuContent extends StatelessWidget {
                         .read<MainAnimationsMenuCubit>()
                         .goToImplicitAnimations,
                   ),
-                  Hero(
-                    tag: 'asd',
-                    child: Button(
-                      text: 'Animations using custom painter/clipper',
-                      onPressed: context
-                          .read<MainAnimationsMenuCubit>()
-                          .goToParticlesEffect,
-                    ),
+                  Button(
+                    text: 'Animated transitions using animated switcher',
+                    onPressed: context
+                        .read<MainAnimationsMenuCubit>()
+                        .goToAniamtedSwitchers,
                   ),
                 ],
               ),
@@ -99,26 +96,6 @@ class Button extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-        ),
-      );
-}
-
-class TestWidget extends StatelessWidget {
-  const TestWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        body: Column(
-          children: [
-            Hero(
-              tag: 'asd',
-              child: Button(
-                text: 'Animations using custom painter/clipper',
-                onPressed:
-                    context.read<MainAnimationsMenuCubit>().goToParticlesEffect,
-              ),
-            ),
-          ],
         ),
       );
 }

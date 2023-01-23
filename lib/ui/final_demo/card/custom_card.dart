@@ -53,6 +53,7 @@ class CustomCard extends StatelessWidget {
                 ),
               ),
               _ImageDescription(
+                offset: offset,
                 rounded: rounded,
                 title: title,
                 description: description,
@@ -68,12 +69,14 @@ class _ImageDescription extends StatelessWidget {
     required this.rounded,
     required this.title,
     required this.description,
+    required this.offset,
     Key? key,
   }) : super(key: key);
 
   final bool rounded;
   final String title;
   final String description;
+  final double offset;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -86,9 +89,9 @@ class _ImageDescription extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              title,
+              '{$title} , {$offset}',
               style: TextStyle(
-                color: const Color.fromARGB(255, 255, 255, 255),
+                color: Colors.white,
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
               ),

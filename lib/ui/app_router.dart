@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/ui/animated_examples/animated_switchers/advanced.dart';
+import 'package:flutter_template/ui/animated_examples/animated_switchers/basic.dart';
+import 'package:flutter_template/ui/animated_examples/animated_switchers/cubit/menu.dart';
 import 'package:flutter_template/ui/animated_examples/implicit_animations/implicit_animations_screen.dart';
 import 'package:flutter_template/ui/animated_examples/main_menu/main_animations_menu.dart';
 import 'package:flutter_template/ui/animated_examples/particle_effect/particle_effect.dart';
@@ -63,7 +66,7 @@ part 'app_router.gr.dart';
           name: 'AnimationsFlowRoute',
           page: EmptyRouterPage,
           transitionsBuilder: customTransition,
-          durationInMilliseconds: 1000,
+          durationInMilliseconds: 500,
           children: [
             AutoRoute(
               path: AppRouter.particlesEffect,
@@ -83,8 +86,24 @@ part 'app_router.gr.dart';
               page: ImplicitAnimationsScreen,
             ),
             AutoRoute(
-              path: 'TestHero',
-              page: TestWidget,
+              path: 'AnimatedSwitcherFlow',
+              name: 'AnimatedSwitcherFlowRoute',
+              page: EmptyRouterPage,
+              children: [
+                AutoRoute(
+                  path: AppRouter.animatedSwitcherMenu,
+                  page: AnimatedSwitcherMenu,
+                  initial: true,
+                ),
+                AutoRoute(
+                  path: AppRouter.advancedAnimatedSwitcher,
+                  page: AdvancedAnimatedSwitcher,
+                ),
+                AutoRoute(
+                  path: AppRouter.basicAnimatedSwitcher,
+                  page: BasicAnimatedSwitcher,
+                ),
+              ],
             ),
           ],
         ),
@@ -101,9 +120,13 @@ class AppRouter extends _$AppRouter {
   static const implicitAnimations = 'implicitAnimatons';
   static const finalDemoFlow = 'finalDemoFlow';
   static const demoHome = 'demoHome';
+  static const animatedSwitcherMenu = 'animatedSwitcherDemo';
+  static const advancedAnimatedSwitcher = 'advancedAnimatedSwitcher';
+  static const basicAnimatedSwitcher = 'basicAnimatedSwitcher';
   static const demoCardDetails = 'demoCardDetails';
 }
 
+//Clipper animation
 Widget customTransition(
   BuildContext context,
   Animation<double> firstAnimation,

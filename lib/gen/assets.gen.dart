@@ -12,21 +12,21 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/forest.jpg
-  AssetGenImage get forest => const AssetGenImage('assets/images/forest.jpg');
+  /// File path: assets/images/forest.png
+  AssetGenImage get forest => const AssetGenImage('assets/images/forest.png');
 
-  /// File path: assets/images/river.jpg
-  AssetGenImage get river => const AssetGenImage('assets/images/river.jpg');
+  /// File path: assets/images/river.png
+  AssetGenImage get river => const AssetGenImage('assets/images/river.png');
 
-  /// File path: assets/images/space.jpg
-  AssetGenImage get space => const AssetGenImage('assets/images/space.jpg');
+  /// File path: assets/images/space.png
+  AssetGenImage get space => const AssetGenImage('assets/images/space.png');
 
-  /// File path: assets/images/waterfall.jpg
+  /// File path: assets/images/waterfall.png
   AssetGenImage get waterfall =>
-      const AssetGenImage('assets/images/waterfall.jpg');
+      const AssetGenImage('assets/images/waterfall.png');
 
-  /// File path: assets/images/winter.jpg
-  AssetGenImage get winter => const AssetGenImage('assets/images/winter.jpg');
+  /// File path: assets/images/winter.png
+  AssetGenImage get winter => const AssetGenImage('assets/images/winter.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [forest, river, space, waterfall, winter];

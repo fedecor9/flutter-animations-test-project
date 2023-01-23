@@ -168,7 +168,7 @@ class _MyWidgetState extends State<MyWidget>
   var isOpen = false;
   bool _canBeDragged = true;
   final duration = const Duration(milliseconds: 200);
-
+  //Drag animation -> Custom animations
   void toogle() {
     controller.isDismissed ? controller.forward() : controller.reverse();
   }

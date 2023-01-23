@@ -357,14 +357,14 @@ class _SliderState extends State<_Slider> {
                 Tween<Offset>(begin: Offset(.8.sw, 0), end: const Offset(0, 0)),
               ),
         builder: (context, animation, child) {
-          precacheImage(Image.asset("assets/images/forest.jpg").image, context);
-          precacheImage(Image.asset("assets/images/winter.jpg").image, context);
+          precacheImage(Image.asset("assets/images/forest.png").image, context);
+          precacheImage(Image.asset("assets/images/winter.png").image, context);
           precacheImage(
-            Image.asset("assets/images/waterfall.jpg").image,
+            Image.asset("assets/images/waterfall.png").image,
             context,
           );
-          precacheImage(Image.asset("assets/images/space.jpg").image, context);
-          precacheImage(Image.asset("assets/images/river.jpg").image, context);
+          precacheImage(Image.asset("assets/images/space.png").image, context);
+          precacheImage(Image.asset("assets/images/river.png").image, context);
           return Opacity(
             opacity: animation.get('opacity'),
             child: Transform.translate(
@@ -424,31 +424,31 @@ enum Places {
   forest(
     description: 'Neque porro quisquam est qui dolorem'
         ' ipsum quia dolor sit amet, consectetur...',
-    image: 'assets/images/forest.jpg',
+    image: 'assets/images/forest.png',
     title: 'Forest',
   ),
   waterfall(
     description: 'Neque porro quisquam est qui dolorem'
         ' ipsum quia dolor sit amet, consectetur...',
-    image: 'assets/images/waterfall.jpg',
+    image: 'assets/images/waterfall.png',
     title: 'Waterfall',
   ),
   space(
     description: 'Neque porro quisquam est qui dolorem'
         ' ipsum quia dolor sit amet, consectetur...',
-    image: 'assets/images/space.jpg',
+    image: 'assets/images/space.png',
     title: 'Space',
   ),
   winter(
     description: 'Neque porro quisquam est qui dolorem'
         ' ipsum quia dolor sit amet, consectetur...',
-    image: 'assets/images/winter.jpg',
+    image: 'assets/images/winter.png',
     title: 'Winter',
   ),
   lake(
     description: 'Neque porro quisquam est qui dolorem'
         ' ipsum quia dolor sit amet, consectetur...',
-    image: 'assets/images/river.jpg',
+    image: 'assets/images/river.png',
     title: 'Lake',
   );
 
